@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 🥺</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Calming soft blue and purple gradient */
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Step Visibility & Animation */
+        .step {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-family: 'Pacifico', cursive;
+            color: #7b2cbf; /* Deep calming purple */
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; color: #4a4e69; }
+
+        /* Buttons */
+        .btn {
+            background: #7b2cbf;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
+            background: #5a189a;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #7b2cbf;
+            border: 2px solid #7b2cbf;
+        }
+
+        .btn-outline:hover {
+            background: #f8f9fa;
+            color: #7b2cbf;
+        }
+
+        /* Peace Offering Envelope */
+        .envelope {
+            font-size: 5rem;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .envelope:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* The Moving Button Container */
+        .button-group {
+            position: relative;
+            height: 100px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        #btn-no {
+            position: absolute;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- STEP 1: The Opener -->
+        <div id="step-1" class="step active">
+            <h1>I am so sorry... 🥺</h1>
+            <p>I know I messed up, and I feel terrible about it. It will be never happen again by my side! Can I please have a moment to make it right?</p>
+            <button class="btn" onclick="nextStep(1, 2)">Hear me out 🤍</button>
+        </div>
+
+        <!-- STEP 2: The Apology -->
+        <div id="step-2" class="step">
+            <h2>My Heart is Heavy</h2>
+            <p>I hate knowing that I upset you. You mean absolutely everything to me, and seeing you sad or angry is the worst feeling in the world. I promise to listen, learn, and do better.</p>
+            <button class="btn" onclick="nextStep(2, 3)">I have something for you ➡️</button>
+        </div>
+
+        <!-- STEP 3: The Peace Offering -->
+        <div id="step-3" class="step">
+            <h2>A Tiny Peace Offering 🌸</h2>
+            <p>Tap the envelope below...</p>
+            <div class="envelope" id="envelope" onclick="openEnvelope()">
+                💌
+            </div>
+            <p id="offering-message" style="display: none; font-weight: 600; color: #7b2cbf; font-size: 1.3rem;">
+                Virtual flowers, a tight hug, and a coupon for a date night where you control the TV remote all night!(As a Friend) 🌻🫂📺
+            </p>
+            <button class="btn" id="btn-forgiveness" style="display: none; margin: 0 auto;" onclick="nextStep(3, 4)">One last question...</button>
+        </div>
+
+        <!-- STEP 4: The Ask (With playful trick) -->
+        <div id="step-4" class="step">
+            <h2>Am I Forgiven?</h2>
+            <p>I love you so much. Can we be okay again?</p>
+            
+            <div class="button-group" id="final-buttons">
+                <!-- The Yes Button stays put -->
+                <button class="btn" onclick="forgiven()">Yes, I forgive you ❤️</button>
+                
+                <!-- The No Button will run away -->
+                <button class="btn btn-outline" id="btn-no" onmouseover="moveButton()" onclick="moveButton()">No 😤</button>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" style="display: none;">
+                <h2>Yay! 🎉</h2>
+                <p>Thank you for forgiving me! I love you so much!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Move between steps
+        function nextStep(current, next) {
+            document.getElementById(`step-${current}`).classList.remove('active');
+            document.getElementById(`step-${next}`).classList.add('active');
+        }
+
+        // Open the virtual envelope
+        function openEnvelope() {
+            const envelopeBox = document.getElementById('envelope');
+            envelopeBox.style.cursor = 'default';
+            envelopeBox.innerHTML = '✨💐🍫✨';
+            
+            document.getElementById('offering-message').style.display = 'block';
+            document.getElementById('btn-forgiveness').style.display = 'block';
+        }
+
+        // Make the "No" button run away
+        function moveButton() {
+            const noBtn = document.getElementById('btn-no');
+            const container = document.querySelector('.container');
+            
+            // Calculate random positions within the container
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - btnRect.width - 40;
+            const maxY = containerRect.height - btnRect.height - 40;
+            
+            // Generate random X and Y coordinates (keeping it somewhat centered)
+            const randomX = Math.floor(Math.random() * (maxX + 1)) - (maxX / 2);
+            const randomY = Math.floor(Math.random() * (maxY + 1)) - (maxY / 2);
+            
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        // When she finally clicks "Yes"
+        function forgiven() {
+            document.getElementById('final-buttons').style.display = 'none';
+            document.querySelector('#step-4 p').style.display = 'none';
+            document.querySelector('#step-4 h2').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
